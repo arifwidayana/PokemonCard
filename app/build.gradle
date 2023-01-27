@@ -18,6 +18,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String","BASE_URL", BASE_URL)
+        buildConfigField("String","END_POINT_SEARCH_CARD", END_POINT_SEARCH_CARD)
+        buildConfigField("String","END_POINT_DETAIL_CARD", END_POINT_DETAIL_CARD)
     }
 
     buildTypes {
@@ -96,7 +99,7 @@ dependencies {
     testImplementation "io.mockk:mockk:1.12.4"
 
     implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
