@@ -9,10 +9,12 @@ object Constant {
 
     //Query URL
     const val QUERY_SEARCH = "q"
+    const val DEFAULT_SEARCH = "name:"
     const val PAGE = "page"
     const val PAGE_SIZE = "pageSize"
 
     //Index
     const val DEFAULT_INDEX_PAGE = 1
-    const val NETWORK_PAGE_SIZE = 20
+    const val DEFAULT_PAGE_SIZE = 20
+    const val NETWORK_PAGE_SIZE = 2
 }
