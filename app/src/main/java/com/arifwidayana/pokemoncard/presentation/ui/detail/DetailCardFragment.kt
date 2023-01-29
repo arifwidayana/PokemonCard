@@ -1,11 +1,13 @@
 package com.arifwidayana.pokemoncard.presentation.ui.detail
 
+import android.Manifest
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.arifwidayana.pokemoncard.common.base.BaseFragment
@@ -35,7 +37,7 @@ class DetailCardFragment : BaseFragment<FragmentDetailCardBinding, DetailCardVie
     private fun onClick() {
         binding.apply {
             btnDownload.setOnClickListener {
-                downloadAndCompressImage(requireContext(), pathImage)
+                requestWriteStoragePermission()
                 requireContext().registerReceiver(
                     onComplete,
                     IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
@@ -72,6 +74,20 @@ class DetailCardFragment : BaseFragment<FragmentDetailCardBinding, DetailCardVie
                 }
             }
         }
+    }
+
+    private val writeStoragePermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            downloadAndCompressImage(requireContext(), pathImage)
+        } else {
+            showMessageSnackBar(true, "Permission Denied")
+        }
+    }
+
+    private fun requestWriteStoragePermission() {
+        writeStoragePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private val onComplete = object : BroadcastReceiver() {
